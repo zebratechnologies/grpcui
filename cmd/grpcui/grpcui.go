@@ -21,10 +21,10 @@ import (
 	"sync"
 	"time"
 
-	"github.com/fullstorydev/grpcurl"
 	"github.com/jhump/protoreflect/desc"
 	"github.com/jhump/protoreflect/grpcreflect"
 	"github.com/pkg/browser"
+	"github.com/zebratechnologies/grpcurl"
 	"golang.org/x/crypto/ssh/terminal"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
@@ -121,6 +121,8 @@ var (
 		The path on which the web UI is exposed.
 		Defaults to slash ("/"), which is the root of the server.
 		Example: "/debug/grpcui".`))
+	importUrl = flags.String("import-url", "", prettify(`
+		The URL where the protobufs will be fetched from.`))
 	services multiString
 	methods  multiString
 )
@@ -271,6 +273,9 @@ func main() {
 	if len(importPaths) > 0 && len(protoFiles) == 0 {
 		warn("The -import-path argument is not used unless -proto files are used.")
 	}
+	if len(importPaths) > 0 && len(*importUrl) > 0 {
+		fail(nil, "Use either -import-path or -import-url, but not both.")
+	}
 	if !strings.HasPrefix(*basePath, "/") {
 		fail(nil, `The -base-path must begin with a slash ("/")`)
 	}
@@ -354,7 +359,11 @@ func main() {
 		}
 	} else if len(protoFiles) > 0 {
 		var err error
-		descSource, err = grpcurl.DescriptorSourceFromProtoFiles(importPaths, protoFiles...)
+		if len(*importUrl) > 0 {
+			descSource, err = grpcurl.DescriptorSourceFromRemoteProtoFiles(*importUrl, protoFiles...)
+		} else {
+			descSource, err = grpcurl.DescriptorSourceFromProtoFiles(importPaths, protoFiles...)
+		}
 		if err != nil {
 			fail(err, "Failed to process proto source files.")
 		}
@@ -524,7 +533,7 @@ func prettify(docString string) string {
 		j++
 	}
 
-	return strings.Join(parts[:j], "\n"+indent())
+	return strings.Join(parts[:j], "\n")
 }
 
 func warn(msg string, args ...interface{}) {
