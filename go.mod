@@ -1,4 +1,4 @@
-module github.com/fullstorydev/grpcui
+module github.com/zebratechnologies/grpcui
 
 go 1.15
 

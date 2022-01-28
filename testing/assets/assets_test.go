@@ -1,9 +1,10 @@
 package test_assets
 
 import (
-	"github.com/fullstorydev/grpcui/internal/resources/standalone"
-	"github.com/fullstorydev/grpcui/internal/resources/webform"
 	"testing"
+
+	"github.com/zebratechnologies/grpcui/internal/resources/standalone"
+	"github.com/zebratechnologies/grpcui/internal/resources/webform"
 )
 
 func TestAssets(t *testing.T) {

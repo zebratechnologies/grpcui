@@ -49,7 +49,7 @@ $PREFIX docker push fullstorydev/grpcui:latest
 
 # Homebrew release
 
-URL="https://github.com/fullstorydev/grpcui/archive/${VERSION}.tar.gz"
+URL="https://github.com/zebratechnologies/grpcui/archive/${VERSION}.tar.gz"
 curl -L -o tmp.tgz "$URL"
 SHA="$(sha256sum < tmp.tgz | awk '{ print $1 }')"
 rm tmp.tgz

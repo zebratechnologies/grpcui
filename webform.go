@@ -10,7 +10,7 @@ import (
 
 	"github.com/jhump/protoreflect/desc"
 
-	"github.com/fullstorydev/grpcui/internal/resources/webform"
+	"github.com/zebratechnologies/grpcui/internal/resources/webform"
 )
 
 var webFormTemplate = template.Must(template.New("grpc web form").Parse(string(webform.Template())))
