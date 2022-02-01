@@ -6,7 +6,7 @@
 It's sort of like [Postman](https://www.getpostman.com/), but for gRPC APIs instead of
 REST.
 
-In some ways, this is like an extension to [grpcurl](https://github.com/fullstorydev/grpcurl).
+In some ways, this is like an extension to [grpcurl](https://github.com/zebratechnologies/grpcurl).
 Whereas `grpcurl` is a command-line interface, `grpcui` provides a web/browser-based
 GUI. This lets you interactively construct requests to send to a gRPC server.
 
@@ -21,10 +21,10 @@ reflection, you will either need the proto source files that define the service 
 protoset files that `grpcui` can use.
 
 This repo also provides two library packages
-1. `github.com/fullstorydev/grpcui`: This package contains the building blocks for embedding a
+1. `github.com/zebratechnologies/grpcui`: This package contains the building blocks for embedding a
    gRPC web form into any Go HTTP server. It has functions for accessing the HTML form, the
    JavaScript code that powers it, as well as a sample CSS file, for styling the form.
-2. `github.com/fullstorydev/grpcui/standalone`: This package goes a step further and supplies
+2. `github.com/zebratechnologies/grpcui/standalone`: This package goes a step further and supplies
    a single, simple HTTP handler that provides the entire gRPC web UI. You can just wire this
    handler into your HTTP server to embed a gRPC web page that looks exactly like the one you
    see when you use the `grpcui` command-line program. This single handler uses the above
@@ -62,7 +62,7 @@ the form of an HTML table.
 ### From Source
 You can use the `go` tool to install `grpcui`:
 ```shell
-go install github.com/fullstorydev/grpcui/cmd/grpcui@latest
+go install github.com/zebratechnologies/grpcui/cmd/grpcui@latest
 ```
 
 This installs the command into the `bin` sub-folder of wherever your `$GOPATH`
